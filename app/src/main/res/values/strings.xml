@@ -7,4 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
+    <string name="new_medicine_name">Prescription name, Vitamin C</string>
+    <string name="new_med_dosage">Enter size i.e. 500 mg</string>
+    <string name="new_med_description">Enter description of medication</string>
 </resources>
