@@ -4,6 +4,7 @@ package com.wymsii.whenmeds.models;
  * Created by Reuben Wilson on 10/5/2017.
  */
 
+//@Entity
 public class Script {
 
     private String description;
@@ -16,9 +17,7 @@ public class Script {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
     public String getDescription() {
         return description;
@@ -44,9 +43,6 @@ public class Script {
         this.refills = refills;
     }
 
-
-
-
     public String getName(){
         return name;
     }
@@ -54,7 +50,5 @@ public class Script {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
 }
