@@ -10,4 +10,5 @@
     <string name="new_medicine_name">Prescription name, Vitamin C</string>
     <string name="new_med_dosage">Enter size i.e. 500 mg</string>
     <string name="new_med_description">Enter description of medication</string>
+    <string name="add_script">Add Script</string>
 </resources>

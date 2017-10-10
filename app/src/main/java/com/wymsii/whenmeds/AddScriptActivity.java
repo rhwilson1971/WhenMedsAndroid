@@ -10,4 +10,10 @@ public class AddScriptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_script);
     }
+
+    /* called when the user taps the Send button */
+    public void search(View view){
+
+
+    }
 }
