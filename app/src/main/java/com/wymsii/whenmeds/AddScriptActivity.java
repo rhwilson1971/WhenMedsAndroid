@@ -12,8 +12,8 @@ public class AddScriptActivity extends AppCompatActivity {
     }
 
     /* called when the user taps the Send button */
-    public void search(View view){
+    //public void search(View view){
 
 
-    }
+    //}
 }
