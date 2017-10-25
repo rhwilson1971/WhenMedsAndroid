@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import java.net.URL;
 public class AddScriptActivity extends AppCompatActivity {
 
     static final String API_KEY = "TJyN8tyOyaLAuuogQl8SQVft3bmgcExJUNnbEPGU";
-    static final String API_URL = "https://api.fda.gov/drug/event.json?api_key=%s&search=";
+    static final String API_URL = "https://api.fda.gov/drug/event.json?api_key=%s&search:drug.brand_name=%s";
 
     ProgressBar progressBar;
     TextView responseView;
@@ -31,6 +32,16 @@ public class AddScriptActivity extends AppCompatActivity {
         this.drugName = (EditText)findViewById(R.id.drugName);
         this.progressBar = (ProgressBar)findViewById(R.id.progressBar3);
         this.responseView = (TextView) findViewById(R.id.responseView);
+
+        Button searchButton = (Button)findViewById(R.id.button);
+
+        searchButton.setOnClickListener(new  View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                new FindDrugTask().execute();
+            }
+        });
+
     }
 
     /* called when the user taps the Send button */
@@ -49,9 +60,16 @@ public class AddScriptActivity extends AppCompatActivity {
 
         protected String doInBackground(Void... urls){
             String drug = drugName.getText().toString();
+            Log.i("INFO", drug);
 
             try {
-                URL url = new URL(String.format(API_KEY, drug));
+                // (patient.drug.medicinalproduct:cetirizine+loratadine+diphenhydramine)
+                //https://api.fda.gov/drug/event.json?search=(patient.drug.openfda.brand_name:naprosyn)
+
+                // String urlData = String.format(API_URL, API_KEY, drug);
+                String urlData = String.format("https://api.fda.gov/drug/event.json?search=(patient.drug.openfda.brand_name:%s)", drug);
+                Log.i("INFO", urlData);
+                URL url = new URL(urlData);
                 HttpURLConnection urlConnection =
                         (HttpURLConnection)url.openConnection();
 
@@ -83,7 +101,12 @@ public class AddScriptActivity extends AppCompatActivity {
 
         protected void onPostExecute(String response)
         {
-            
+            if(response == null) {
+                response = "THERE WAS AN ERROR";
+            }
+            progressBar.setVisibility(View.GONE);
+            Log.i("INFO", response);
+            responseView.setText(response);
         }
 
     }
