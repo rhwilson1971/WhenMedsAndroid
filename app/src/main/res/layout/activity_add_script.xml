@@ -7,7 +7,7 @@
     tools:context="com.wymsii.whenmeds.AddScriptActivity">
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/drugName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -23,14 +23,60 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:hint="@android:string/search_go"
         android:text="@string/find_med"
-        app:layout_constraintBottom_toBottomOf="@+id/editText3"
+        app:layout_constraintBottom_toBottomOf="@+id/drugName"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.4"
+        android:layout_marginEnd="8dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/drugName">
+
+    </android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="366dp"
+        android:layout_height="446dp"
+        android:layout_marginTop="33dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:layout_marginLeft="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar3"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="143dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/progressBar3"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/responseView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:text="test" />
+        </ScrollView>
+    </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>
