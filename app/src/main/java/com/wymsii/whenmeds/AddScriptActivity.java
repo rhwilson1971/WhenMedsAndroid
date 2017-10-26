@@ -1,10 +1,12 @@
 package com.wymsii.whenmeds;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -38,6 +40,13 @@ public class AddScriptActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
+                // Hide virtual keyboard
+                InputMethodManager inputManager = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+
                 new FindDrugTask().execute();
             }
         });
@@ -75,14 +84,22 @@ public class AddScriptActivity extends AppCompatActivity {
 
 
                 try {
+                    Log.e("INFO", "read site data");
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     StringBuilder stringBuilder = new StringBuilder();
 
                     String line;
-                    while((line = bufferedReader.readLine()) != null);
 
-                    stringBuilder.append(line).append("\n");
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line).append("\n");
+                    }
                     bufferedReader.close();
+
+                    //line = bufferedReader.readLine();
+                    // while(() != null);
+                    Log.e("INFO", "data " + line);
+                    //stringBuilder.append(line).append("\n");
+                    //bufferedReader.close();
                     return stringBuilder.toString();
 
                 }
@@ -94,7 +111,7 @@ public class AddScriptActivity extends AppCompatActivity {
             catch(Exception e){
                 Log.e("ERROR", e.getMessage());
             }
-
+            Log.e("INFO", "done");
             return null;
 
         }

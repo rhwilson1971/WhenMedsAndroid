@@ -51,4 +51,8 @@ public class Script {
         this.name = name;
     }
 
+    public void parseString(String json){
+        
+    }
+
 }
