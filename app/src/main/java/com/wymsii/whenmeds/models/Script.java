@@ -1,5 +1,11 @@
 package com.wymsii.whenmeds.models;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 /**
  * Created by Reuben Wilson on 10/5/2017.
  */
@@ -52,7 +58,32 @@ public class Script {
     }
 
     public void parseString(String json){
-        
+
+        try {
+
+
+            JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
+
+
+
+
+        }
+        catch (JSONException ex){
+            Log.e("ERROR", ex.getMessage());
+        }
+
+        //try {
+//                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
+//                String requestID = object.getString("requestId");
+//                int likelihood = object.getInt("likelihood");
+//                JSONArray photos = object.getJSONArray("photos");
+//                .
+//                .
+//                .
+//                .
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
     }
 
 }

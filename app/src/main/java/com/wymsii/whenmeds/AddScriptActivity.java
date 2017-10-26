@@ -17,6 +17,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.wymsii.whenmeds.models.Script;
+
 public class AddScriptActivity extends AppCompatActivity {
 
     static final String API_KEY = "TJyN8tyOyaLAuuogQl8SQVft3bmgcExJUNnbEPGU";
@@ -120,6 +122,15 @@ public class AddScriptActivity extends AppCompatActivity {
         {
             if(response == null) {
                 response = "THERE WAS AN ERROR";
+            }
+            else{
+                Script script = new Script();
+
+
+                script.parseString(response);
+
+                // show script info in form
+
             }
             progressBar.setVisibility(View.GONE);
             Log.i("INFO", response);
