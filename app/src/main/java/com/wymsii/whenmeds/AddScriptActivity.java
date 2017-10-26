@@ -84,7 +84,6 @@ public class AddScriptActivity extends AppCompatActivity {
                 HttpURLConnection urlConnection =
                         (HttpURLConnection)url.openConnection();
 
-
                 try {
                     Log.e("INFO", "read site data");
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -97,11 +96,7 @@ public class AddScriptActivity extends AppCompatActivity {
                     }
                     bufferedReader.close();
 
-                    //line = bufferedReader.readLine();
-                    // while(() != null);
                     Log.e("INFO", "data " + line);
-                    //stringBuilder.append(line).append("\n");
-                    //bufferedReader.close();
                     return stringBuilder.toString();
 
                 }
