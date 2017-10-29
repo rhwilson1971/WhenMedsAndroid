@@ -2,9 +2,13 @@ package com.wymsii.whenmeds.models;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Reuben Wilson on 10/5/2017.
@@ -13,11 +17,14 @@ import org.json.JSONTokener;
 //@Entity
 public class Script {
 
+    private String rawData;
     private String description;
     private String dosage;
     private int refills;
     private int id;
     private String name;
+    List<String> genericTitles = new ArrayList<>();
+    List<String> brandTitles = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -57,33 +64,59 @@ public class Script {
         this.name = name;
     }
 
-    public void parseString(String json){
+    public String getRawData(){
+        return this.rawData;
+    }
 
+    public Boolean parseString(String json){
+        Boolean success = false;
         try {
 
+            this.rawData = json;
+            JSONObject object = (JSONObject) new JSONTokener(this.rawData).nextValue();
 
-            JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
+            JSONArray results = object.getJSONArray("results");
 
+            for ( int i = 0; i<results.length(); i++){
+                JSONObject result = results.getJSONObject(i);
+                JSONObject patient = result.getJSONObject("patient");
+                JSONArray drugs =
+                    patient.getJSONArray("drug");
 
+                for( int j=0; j<drugs.length(); j++){
+                    JSONObject drug = drugs.getJSONObject(j);
 
+                    if(drug.has("openfda")) {
 
+                        JSONObject openFda = drug.getJSONObject("openfda");
+
+                        JSONArray genericNames = openFda.getJSONArray("generic_name");
+                        JSONArray brandNames = openFda.getJSONArray("brand_name");
+
+                        int x=0;
+                        for( ; x<genericNames.length(); x++){
+                            genericTitles.add(genericNames.getString(x));
+                        }
+                        x=0;
+                        for( ; x<brandNames.length(); x++){
+                            brandTitles.add(brandNames.getString(x));
+                        }
+                    }
+                }
+                Log.i("INFO", "Number of drugs is " + drugs.length());
+            }
+
+            Log.i("INFO", "");
+            success = true;
         }
         catch (JSONException ex){
             Log.e("ERROR", ex.getMessage());
         }
 
-        //try {
-//                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
-//                String requestID = object.getString("requestId");
-//                int likelihood = object.getInt("likelihood");
-//                JSONArray photos = object.getJSONArray("photos");
-//                .
-//                .
-//                .
-//                .
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+        return success;
     }
 
+    public List<String> getBrandNames() { return this.brandTitles; }
+
+    public List<String> getGenericNames() { return this.genericTitles; }
 }

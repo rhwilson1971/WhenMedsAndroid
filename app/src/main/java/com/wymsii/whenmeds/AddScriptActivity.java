@@ -115,21 +115,30 @@ public class AddScriptActivity extends AppCompatActivity {
 
         protected void onPostExecute(String response)
         {
+            StringBuilder responseText = new StringBuilder();
             if(response == null) {
-                response = "THERE WAS AN ERROR";
+                responseText.append("Couldn't find drug");
             }
             else{
                 Script script = new Script();
+                Boolean good = script.parseString(response);
 
+                if(good){
+                    responseText.append("[Brand Names]\n");
+                    for (String item : script.getBrandNames()) {
+                        responseText.append(item);
+                        responseText.append("\n");
+                    }
 
-                script.parseString(response);
-
-                // show script info in form
-
+                    responseText.append("[Generic Names]\n");
+                    for(String item : script.getGenericNames()){
+                        responseText.append(item);
+                        responseText.append("\n");
+                    }
+                }
             }
             progressBar.setVisibility(View.GONE);
-            Log.i("INFO", response);
-            responseView.setText(response);
+            responseView.setText(responseText.toString());
         }
 
     }
