@@ -8,7 +8,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Reuben Wilson on 10/5/2017.
@@ -23,8 +25,8 @@ public class Script {
     private int refills;
     private int id;
     private String name;
-    List<String> genericTitles = new ArrayList<>();
-    List<String> brandTitles = new ArrayList<>();
+    Set<String> genericTitles = new HashSet<>();
+    Set<String> brandTitles = new HashSet<>();
 
     public int getId() {
         return id;
@@ -95,6 +97,7 @@ public class Script {
 
                         int x=0;
                         for( ; x<genericNames.length(); x++){
+
                             genericTitles.add(genericNames.getString(x));
                         }
                         x=0;
@@ -116,7 +119,7 @@ public class Script {
         return success;
     }
 
-    public List<String> getBrandNames() { return this.brandTitles; }
+    public Set<String> getBrandNames() { return this.brandTitles; }
 
-    public List<String> getGenericNames() { return this.genericTitles; }
+    public Set<String> getGenericNames() { return this.genericTitles; }
 }

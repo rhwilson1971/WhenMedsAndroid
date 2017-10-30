@@ -70,11 +70,10 @@
             android:layout_below="@+id/progressBar3"
             android:layout_alignParentStart="true">
 
-            <TextView
-                android:id="@+id/responseView"
+            <ListView
+                android:id="@+id/drugSelections"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:text="test" />
+                android:layout_height="wrap_content" />
         </ScrollView>
     </RelativeLayout>
 

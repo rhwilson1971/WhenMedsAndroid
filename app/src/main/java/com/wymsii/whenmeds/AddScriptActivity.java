@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,6 +19,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.wymsii.whenmeds.models.Script;
 
@@ -24,9 +29,12 @@ public class AddScriptActivity extends AppCompatActivity {
     static final String API_KEY = "TJyN8tyOyaLAuuogQl8SQVft3bmgcExJUNnbEPGU";
     static final String API_URL = "https://api.fda.gov/drug/event.json?api_key=%s&search:drug.brand_name=%s";
 
+    ListView drugListView;
     ProgressBar progressBar;
     TextView responseView;
     EditText drugName;
+
+    List<String> drugItemsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +43,16 @@ public class AddScriptActivity extends AppCompatActivity {
 
         this.drugName = (EditText)findViewById(R.id.drugName);
         this.progressBar = (ProgressBar)findViewById(R.id.progressBar3);
-        this.responseView = (TextView) findViewById(R.id.responseView);
+         //  this.responseView = (TextView) findViewById(R.id.responseView);
+        this.drugListView = (ListView)findViewById(R.id.drugSelections);
+
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                drugItemsList );
+
+        drugListView.setAdapter(arrayAdapter);
 
         Button searchButton = (Button)findViewById(R.id.button);
 
@@ -66,7 +83,8 @@ public class AddScriptActivity extends AppCompatActivity {
 
         protected void onPreExecute(){
             progressBar.setVisibility(View.VISIBLE);
-            responseView.setText("");
+            // drugListView.
+            //responseView.setText("");
         }
 
         protected String doInBackground(Void... urls){
@@ -128,17 +146,21 @@ public class AddScriptActivity extends AppCompatActivity {
                     for (String item : script.getBrandNames()) {
                         responseText.append(item);
                         responseText.append("\n");
+                        drugItemsList.add(item);
                     }
 
                     responseText.append("[Generic Names]\n");
                     for(String item : script.getGenericNames()){
                         responseText.append(item);
+                        drugItemsList.add(item);
                         responseText.append("\n");
                     }
                 }
             }
+
+
             progressBar.setVisibility(View.GONE);
-            responseView.setText(responseText.toString());
+            // responseView.setText(responseText.toString());
         }
 
     }
