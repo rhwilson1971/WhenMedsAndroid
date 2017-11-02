@@ -35,6 +35,7 @@ public class AddScriptActivity extends AppCompatActivity {
     EditText drugName;
 
     List<String> drugItemsList = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter; // = new ArrayAdapter<String>()
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,14 @@ public class AddScriptActivity extends AppCompatActivity {
         this.drugListView = (ListView)findViewById(R.id.drugSelections);
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        this.arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 drugItemsList );
 
         drugListView.setAdapter(arrayAdapter);
+
+        arrayAdapter.add("The jones");
 
         Button searchButton = (Button)findViewById(R.id.button);
 
@@ -69,7 +72,6 @@ public class AddScriptActivity extends AppCompatActivity {
                 new FindDrugTask().execute();
             }
         });
-
     }
 
     /* called when the user taps the Send button */
@@ -83,8 +85,6 @@ public class AddScriptActivity extends AppCompatActivity {
 
         protected void onPreExecute(){
             progressBar.setVisibility(View.VISIBLE);
-            // drugListView.
-            //responseView.setText("");
         }
 
         protected String doInBackground(Void... urls){
@@ -146,22 +146,23 @@ public class AddScriptActivity extends AppCompatActivity {
                     for (String item : script.getBrandNames()) {
                         responseText.append(item);
                         responseText.append("\n");
-                        drugItemsList.add(item);
+                        arrayAdapter.add(item);
                     }
 
                     responseText.append("[Generic Names]\n");
                     for(String item : script.getGenericNames()){
                         responseText.append(item);
-                        drugItemsList.add(item);
+                        arrayAdapter.add(item);
                         responseText.append("\n");
                     }
                 }
-            }
 
+                arrayAdapter.notifyDataSetChanged();
+                drugListView.invalidateViews();
+            }
 
             progressBar.setVisibility(View.GONE);
             // responseView.setText(responseText.toString());
         }
-
     }
 }
