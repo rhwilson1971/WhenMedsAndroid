@@ -12,4 +12,5 @@
     <string name="new_med_description">Enter description of medication</string>
     <string name="add_script">Add Script</string>
     <string name="find_med">Search</string>
+    <string name="title_activity_splash">Splash</string>
 </resources>
