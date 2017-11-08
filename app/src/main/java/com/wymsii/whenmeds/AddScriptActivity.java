@@ -48,6 +48,7 @@ public class AddScriptActivity extends AppCompatActivity {
         this.drugListView = (ListView)findViewById(R.id.drugSelections);
 
 
+
         this.arrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -55,7 +56,7 @@ public class AddScriptActivity extends AppCompatActivity {
 
         drugListView.setAdapter(arrayAdapter);
 
-        arrayAdapter.add("The jones");
+        // arrayAdapter.add("The jones");
 
         Button searchButton = (Button)findViewById(R.id.button);
 

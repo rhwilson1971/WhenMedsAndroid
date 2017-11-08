@@ -1,5 +1,6 @@
 package com.wymsii.whenmeds;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String EXTRA_MESSAGE = "com.wymsii.WhenMeds.MESSAGE";
+    private static final int MAX_SPLASH_SECONDS = 10;
+    private Dialog splashDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
