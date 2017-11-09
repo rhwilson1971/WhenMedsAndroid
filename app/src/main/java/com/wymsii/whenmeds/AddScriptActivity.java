@@ -63,6 +63,11 @@ public class AddScriptActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new  View.OnClickListener(){
             @Override
             public void onClick(View v){
+                // clear the listView
+                ListView lv = (ListView)findViewById(R.id.drugSelections);
+                arrayAdapter.clear();
+                lv.invalidateViews();
+
                 // Hide virtual keyboard
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -73,6 +78,9 @@ public class AddScriptActivity extends AppCompatActivity {
                 new FindDrugTask().execute();
             }
         });
+
+        // hide progress bar
+        progressBar.setVisibility(View.GONE);
     }
 
     /* called when the user taps the Send button */
@@ -80,6 +88,7 @@ public class AddScriptActivity extends AppCompatActivity {
 
 
     //}
+
     class FindDrugTask extends AsyncTask<Void,Void,String> {
 
         private Exception exception;
@@ -134,32 +143,27 @@ public class AddScriptActivity extends AppCompatActivity {
 
         protected void onPostExecute(String response)
         {
-            StringBuilder responseText = new StringBuilder();
             if(response == null) {
-                responseText.append("Couldn't find drug");
+                arrayAdapter.add("Couldn't locate drug information");
             }
             else{
                 Script script = new Script();
                 Boolean good = script.parseString(response);
 
                 if(good){
-                    responseText.append("[Brand Names]\n");
                     for (String item : script.getBrandNames()) {
-                        responseText.append(item);
-                        responseText.append("\n");
                         arrayAdapter.add(item);
                     }
 
-                    responseText.append("[Generic Names]\n");
                     for(String item : script.getGenericNames()){
-                        responseText.append(item);
                         arrayAdapter.add(item);
-                        responseText.append("\n");
                     }
                 }
 
                 arrayAdapter.notifyDataSetChanged();
-                drugListView.invalidateViews();
+
+                ListView lv = (ListView)findViewById(R.id.drugSelections);
+                lv.invalidateViews();
             }
 
             progressBar.setVisibility(View.GONE);
