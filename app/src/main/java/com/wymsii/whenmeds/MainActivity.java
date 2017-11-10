@@ -34,10 +34,24 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = new Intent();
+
+                startActivity(intent);
+
+            }
+        });
+
+        /*
+                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+         */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -109,17 +123,21 @@ public class MainActivity extends AppCompatActivity
 
     /* called when the user taps the Send button */
     public void sendMessage(View view){
+        /*
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+        */
     }
 
     public void addScript(View view){
-        Intent intent = new Intent(this, AddScriptActivity.class);
-        System.out.println("In View");
-        startActivity(intent);
+        //Intent intent = new Intent(this, AddScriptActivity.class);
+        //System.out.println("In View");
+        //startActivity(intent);
+
+
     }
 
 }
