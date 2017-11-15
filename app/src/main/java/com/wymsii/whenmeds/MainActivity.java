@@ -15,10 +15,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     public static final String EXTRA_MESSAGE = "com.wymsii.WhenMeds.MESSAGE";
     private static final int MAX_SPLASH_SECONDS = 10;
@@ -51,6 +56,22 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ArrayList<String> items2 = new ArrayList<>();
+        items2.add("Lisinopril at 10am");
+        items2.add("Triamterene at 10am");
+
+        ListView reminderListView = (ListView)findViewById(R.id.AllScriptsList);
+
+        // reminderListView
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                items2 );
+
+        reminderListView.setAdapter(arrayAdapter);
+
     }
 
 
