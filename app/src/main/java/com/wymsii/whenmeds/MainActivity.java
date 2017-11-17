@@ -59,11 +59,13 @@ public class MainActivity extends AppCompatActivity
 
         ArrayList<String> items2 = new ArrayList<>();
         items2.add("Lisinopril at 10am");
-        items2.add("Triamterene at 10am");
+        items2.add("Triamterene 37.5 5mg/HTCZ 25mg at 10am");
+        items2.add("Cyclobenzaprine at 11pm");
+        items2.add("Naproxen 500mg at 11pm");
+        items2.add("Oxycabazepine 300mg at 11:30pm");
+        items2.add("Clonazepam 0.5mg 11:30 pm");
 
         ListView reminderListView = (ListView)findViewById(R.id.AllScriptsList);
-
-        // reminderListView
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
