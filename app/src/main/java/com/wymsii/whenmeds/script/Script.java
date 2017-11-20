@@ -1,5 +1,6 @@
 package com.wymsii.whenmeds.script;
 
+import android.arch.persistence.room.Entity;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -14,7 +15,7 @@ import java.util.Set;
  * Created by Reuben Wilson on 10/5/2017.
  */
 
-//@Entity
+@Entity
 public class Script {
 
     private String rawData;
@@ -23,8 +24,11 @@ public class Script {
     private int refills;
     private int id;
     private String name;
+
     Set<String> genericTitles = new HashSet<>();
     Set<String> brandTitles = new HashSet<>();
+
+    public void setRawData(String rawData) { this.rawData = rawData;}
 
     public int getId() {
         return id;

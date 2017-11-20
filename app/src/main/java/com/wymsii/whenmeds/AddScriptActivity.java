@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wymsii.whenmeds.script.Script;
+import com.wymsii.whenmeds.script.ScriptHelper;
 
 public class AddScriptActivity extends AppCompatActivity {
 
@@ -146,10 +147,13 @@ public class AddScriptActivity extends AppCompatActivity {
                 arrayAdapter.add("Couldn't locate drug information");
             }
             else{
-                Script script = new Script();
-                Boolean good = script.parseString(response);
+                // Script script = new Script();
+                //Boolean good = script.parseString(response);
 
-                if(good){
+                Script script = ScriptHelper.parseString(response);
+
+                if(script.getBrandNames().isEmpty() == false||
+                        script.getGenericNames().isEmpty() == false){
                     for (String item : script.getBrandNames()) {
                         arrayAdapter.add(item);
                     }

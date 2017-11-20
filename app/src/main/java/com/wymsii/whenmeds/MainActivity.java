@@ -1,6 +1,7 @@
 package com.wymsii.whenmeds;
 
 import android.app.Dialog;
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity
                 items2 );
 
         reminderListView.setAdapter(arrayAdapter);
+
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "whenmeds-db").build();
 
     }
 
