@@ -1,6 +1,7 @@
 package com.wymsii.whenmeds.script;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -15,7 +16,9 @@ import java.util.Set;
  * Created by Reuben Wilson on 10/5/2017.
  */
 
-@Entity
+@Entity(foreignkeys = @ForeignKey(entity=Reminder.class,
+                                    parentColumns="id",
+                                    childColumns="reminderId"))
 public class Script {
 
     private String rawData;
@@ -23,7 +26,8 @@ public class Script {
     private String dosage;
     private int refills;
     private int id;
-    private String name;
+    private String genericName;
+    private String brandName;
 
     Set<String> genericTitles = new HashSet<>();
     Set<String> brandTitles = new HashSet<>();
@@ -33,13 +37,11 @@ public class Script {
     public int getId() {
         return id;
     }
-
     public void setId(int id) { this.id = id; }
 
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -47,7 +49,6 @@ public class Script {
     public String getDosage() {
         return dosage;
     }
-
     public void setDosage(String dosage) {
         this.dosage = dosage;
     }
@@ -55,7 +56,6 @@ public class Script {
     public int getRefills() {
         return refills;
     }
-
     public void setRefills(int refills) {
         this.refills = refills;
     }
@@ -63,7 +63,6 @@ public class Script {
     public String getName(){
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -71,7 +70,6 @@ public class Script {
     public String getRawData(){
         return this.rawData;
     }
-
     public Boolean parseString(String json){
         Boolean success = false;
         try {
