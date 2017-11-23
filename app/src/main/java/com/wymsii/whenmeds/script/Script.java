@@ -1,7 +1,13 @@
 package com.wymsii.whenmeds.script;
 
+import com.wymsii.whenmeds.reminder.Reminder;
+
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -16,28 +22,34 @@ import java.util.Set;
  * Created by Reuben Wilson on 10/5/2017.
  */
 
-@Entity(foreignkeys = @ForeignKey(entity=Reminder.class,
-                                    parentColumns="id",
-                                    childColumns="reminderId"))
+@Entity
 public class Script {
 
-    private String rawData;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="script_id")
+    private int scriptId;
+
     private String description;
     private String dosage;
     private int refills;
-    private int id;
+
     private String genericName;
     private String brandName;
 
+    @Ignore
+    private String rawData;
+    @Ignore
     Set<String> genericTitles = new HashSet<>();
+    @Ignore
     Set<String> brandTitles = new HashSet<>();
+
 
     public void setRawData(String rawData) { this.rawData = rawData;}
 
-    public int getId() {
-        return id;
+    public int getScriptId() {
+        return scriptId;
     }
-    public void setId(int id) { this.id = id; }
+    public void setScriptId(int id) { this.scriptId = id; }
 
     public String getDescription() {
         return description;
@@ -60,12 +72,15 @@ public class Script {
         this.refills = refills;
     }
 
-    public String getName(){
-        return name;
+    public String getGenericName(){
+        return this.genericName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
     }
+
+    public String getBrandName() { return this.brandName; }
+    public void setBrandName(String brandName) { this.brandName = brandName; }
 
     public String getRawData(){
         return this.rawData;

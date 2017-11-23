@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity
 
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "whenmeds-db").build();
+                AppDatabase.class, AppDatabase.DATABASE_NAME).build();
+
 
     }
 

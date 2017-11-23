@@ -7,29 +7,24 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.wymsii.whenmeds.script.Script;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by reuben on 11/9/17.
  */
 
 @Entity(
-tableName = "reminder",
         foreignKeys = {
-        @ForeignKey(entity = Script.class,
-        parentColumns = "rid",
-        childColumns = "scriptId",
-        onDelete = ForeignKey.CASCADE)},
-        indices = {@Index(value = "scriptId")
+                @ForeignKey(entity = Script.class,
+                        parentColumns = "scriptId",
+                        childColumns = "script_id",
+                        onDelete = ForeignKey.CASCADE)},
+        indices = {@Index(value = "script_id")
         })
 public class Reminder {
 
-    @PrimaryKey
-    private int rid;
-    private int scriptId;
+    @PrimaryKey(autoGenerate = true)
+    private int reminderId;
     @ColumnInfo(name="end_date")
     Date endDate;
     @ColumnInfo(name="start_date")
@@ -37,8 +32,11 @@ public class Reminder {
     @ColumnInfo(name="reminder_name")
     String reminderName;
 
+    @ColumnInfo(name = "script_id")
+    private int scriptId;
+
     public void setReminderName(String reminderName){ this.reminderName = reminderName; }
-    public void setRid(int rid) { this.rid = rid;}
+    public void setReminderId(int rid) { this.reminderId = rid;}
     public void setStartDate(Date startDate) { this.startDate = startDate; }
     public void setEndDate(Date endDate){this.endDate = endDate;}
     public void setScriptId(int scriptId){ this.scriptId = scriptId;}
@@ -46,6 +44,6 @@ public class Reminder {
     public String getReminderName() { return this.reminderName; }
     public Date getEndDate(){ return this.endDate;}
     public Date getStartDate() { return this.startDate; }
-    public int getId() { return this.rid; }
+    public int getReminderId() { return this.reminderId; }
     public int getScriptId() { return this.scriptId; }
 }
