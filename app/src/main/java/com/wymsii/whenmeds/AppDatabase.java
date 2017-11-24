@@ -6,10 +6,12 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
+import com.wymsii.whenmeds.converter.DateConverter;
 import com.wymsii.whenmeds.reminder.Reminder;
 import com.wymsii.whenmeds.reminder.ReminderDao;
 
@@ -24,6 +26,7 @@ import java.util.List;
  */
 
 @Database(entities = {Reminder.class, Script.class}, version = 1)
+@TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase{
 
     private static AppDatabase sInstance;
@@ -88,10 +91,14 @@ public abstract class AppDatabase extends RoomDatabase{
 
     private static void insertData(final AppDatabase database, final List<Script> scripts,
                                    final List<Reminder> reminders) {
-        database.runInTransaction(() -> {
-            database.reminderDao().insertAll(reminders);
-            database.scriptDao().insertAll(scripts);
-        });
+
+        database.scriptDao().insertAll(scripts);
+        database.reminderDao().insertAll(reminders);
+
+        //database.runInTransaction(() -> {
+        //    database.reminderDao().insertAll(reminders);
+        //    database.scriptDao().insertAll(scripts);
+        //});
     }
 
     private static void addDelay() {

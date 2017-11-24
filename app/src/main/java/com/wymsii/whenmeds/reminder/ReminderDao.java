@@ -15,7 +15,7 @@ import java.util.List;
 
 @Dao
 public interface ReminderDao {
-    @Query("SELECT * from Reminder")
+    @Query("SELECT * from reminders")
     List<Reminder> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

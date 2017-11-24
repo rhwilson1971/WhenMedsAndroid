@@ -13,30 +13,25 @@ import java.util.Date;
  * Created by reuben on 11/9/17.
  */
 
-@Entity(
+@Entity(tableName = "reminders",
         foreignKeys = {
                 @ForeignKey(entity = Script.class,
-                        parentColumns = "scriptId",
-                        childColumns = "script_id",
+                        parentColumns = "id",
+                        childColumns = "scriptId",
                         onDelete = ForeignKey.CASCADE)},
-        indices = {@Index(value = "script_id")
+        indices = {@Index(value = "scriptId")
         })
 public class Reminder {
 
     @PrimaryKey(autoGenerate = true)
-    private int reminderId;
-    @ColumnInfo(name="end_date")
+    private int id;
     Date endDate;
-    @ColumnInfo(name="start_date")
     Date startDate;
-    @ColumnInfo(name="reminder_name")
     String reminderName;
-
-    @ColumnInfo(name = "script_id")
     private int scriptId;
 
     public void setReminderName(String reminderName){ this.reminderName = reminderName; }
-    public void setReminderId(int rid) { this.reminderId = rid;}
+    public void setId(int rid) { this.id = rid;}
     public void setStartDate(Date startDate) { this.startDate = startDate; }
     public void setEndDate(Date endDate){this.endDate = endDate;}
     public void setScriptId(int scriptId){ this.scriptId = scriptId;}
@@ -44,6 +39,6 @@ public class Reminder {
     public String getReminderName() { return this.reminderName; }
     public Date getEndDate(){ return this.endDate;}
     public Date getStartDate() { return this.startDate; }
-    public int getReminderId() { return this.reminderId; }
+    public int getId() { return this.id; }
     public int getScriptId() { return this.scriptId; }
 }

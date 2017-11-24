@@ -22,12 +22,11 @@ import java.util.Set;
  * Created by Reuben Wilson on 10/5/2017.
  */
 
-@Entity
+@Entity(tableName = "scripts")
 public class Script {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="script_id")
-    private int scriptId;
+    private int id;
 
     private String description;
     private String dosage;
@@ -46,10 +45,10 @@ public class Script {
 
     public void setRawData(String rawData) { this.rawData = rawData;}
 
-    public int getScriptId() {
-        return scriptId;
+    public int getId() {
+        return this.id;
     }
-    public void setScriptId(int id) { this.scriptId = id; }
+    public void setId(int id) { this.id = id; }
 
     public String getDescription() {
         return description;
