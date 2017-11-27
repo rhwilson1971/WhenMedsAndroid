@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +20,9 @@ import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.wymsii.whenmeds.reminder.Reminder;
+import com.wymsii.whenmeds.script.Script;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
-
+                // can also use view.getContext();
                 // Intent intent = new Intent()
 
                 //Intent intent = new Intent(this, AddScriptActivity.class);
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -68,14 +72,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ArrayList<String> items2 = new ArrayList<>();
-        items2.add("Lisinopril at 10am");
-        items2.add("Triamterene 37.5 5mg/HTCZ 25mg at 10am");
-        items2.add("Cyclobenzaprine at 11pm");
-        items2.add("Naproxen 500mg at 11pm");
-        items2.add("Oxycabazepine 300mg at 11:30pm");
-        items2.add("Clonazepam 0.5mg 11:30 pm");
+        //ArrayList<String> items2 = new ArrayList<>();
+        //items2.add("Lisinopril at 10am");
+        //items2.add("Triamterene 37.5 5mg/HTCZ 25mg at 10am");
+        //items2.add("Cyclobenzaprine at 11pm");
+        //items2.add("Naproxen 500mg at 11pm");
+        //items2.add("Oxycabazepine 300mg at 11:30pm");
+        //items2.add("Clonazepam 0.5mg 11:30 pm");
 
+        /*
         ListView reminderListView = (ListView)findViewById(R.id.AllScriptsList);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
@@ -84,10 +89,22 @@ public class MainActivity extends AppCompatActivity
                 items2 );
 
         reminderListView.setAdapter(arrayAdapter);
-
+        */
 
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, AppDatabase.DATABASE_NAME).build();
+
+        //List<Reminder> reminders=
+        //        db.reminderDao().getAll();
+
+/*        List<Script> scripts = db.scriptDao().getAll();
+
+        for(Script script : scripts){
+
+            Log.i("INFO", script.getBrandName());
+
+
+        }*/
 
 
     }
