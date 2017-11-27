@@ -6,8 +6,6 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.wymsii.whenmeds.reminder.Reminder;
-
 import java.util.List;
 
 /**
@@ -17,7 +15,7 @@ import java.util.List;
 @Dao
 public interface ScriptDao {
     @Query("SELECT * from scripts")
-    List<Reminder> getAll();
+    List<Script> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Script> scripts);

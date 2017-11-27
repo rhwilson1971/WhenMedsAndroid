@@ -3,6 +3,7 @@ package com.wymsii.whenmeds.reminder;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  * Created by reuben on 11/9/17.
  */
 
+
 @Entity(tableName = "reminders",
         foreignKeys = {
                 @ForeignKey(entity = Script.class,
@@ -21,6 +23,7 @@ import java.util.Date;
                         onDelete = ForeignKey.CASCADE)},
         indices = {@Index(value = "scriptId")
         })
+//@Entity(tableName = "reminders")
 public class Reminder {
 
     @PrimaryKey(autoGenerate = true)
