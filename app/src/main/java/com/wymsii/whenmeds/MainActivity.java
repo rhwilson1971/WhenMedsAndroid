@@ -1,6 +1,7 @@
 package com.wymsii.whenmeds;
 
 import android.app.Dialog;
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.wymsii.whenmeds.reminder.Reminder;
+import com.wymsii.whenmeds.reminder.ReminderDao;
 import com.wymsii.whenmeds.script.Script;
 
 import java.util.ArrayList;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        
+
         //ArrayList<String> items2 = new ArrayList<>();
         //items2.add("Lisinopril at 10am");
         //items2.add("Triamterene 37.5 5mg/HTCZ 25mg at 10am");
@@ -91,9 +95,21 @@ public class MainActivity extends AppCompatActivity
         reminderListView.setAdapter(arrayAdapter);
         */
 
+
+
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, AppDatabase.DATABASE_NAME).build();
 
+
+        ReminderDao rdo =
+        db.reminderDao();
+
+        List<Reminder> reminders = rdo.getAll();
+        for(Reminder r: reminders){
+            Log.d("DEBUG", r.getReminderName());
+
+        }
+        Log.d("DEBUG", "Hello");
         //List<Reminder> reminders=
         //        db.reminderDao().getAll();
 
