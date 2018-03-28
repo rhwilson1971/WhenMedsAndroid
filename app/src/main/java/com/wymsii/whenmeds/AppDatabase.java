@@ -58,6 +58,10 @@ public abstract class AppDatabase extends RoomDatabase{
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
+
+                        AppDatabase database = AppDatabase.getInstance(appContext);
+                        database.setDatabaseCreated();
+
                         /*
                         executors.diskIO().execute(() -> {
                             // Add a delay to simulate a long-running operation
